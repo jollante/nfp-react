@@ -5,16 +5,14 @@ export default function OldCycles(props) {
 
     const funnyArray = [
         'Nice Try But Here Is No Data',
-        'Maybe Start A Cycle And Come Back',
-        'Nothing To See Here',
         'Be Right Back - Hopefully With Data'
     ]
 
     const funnyGifs = [
-        'https://media.giphy.com/media/StKiS6x698JAl9d6cx/giphy.gif',
-        'https://media.giphy.com/media/dXKiD8XysOuhFAJB1f/giphy.gif',
-        'https://media.giphy.com/media/hsxHqVGqz4vxg5N7xb/giphy.gif',
-        'https://media.giphy.com/media/vwI4mYEHP8k0w/giphy.gif'
+        'https://media.giphy.com/media/j6TdvPXdAssootjCKZ/giphy.gif',
+        'https://media.giphy.com/media/L1VXD3bEo3Uelzk6EF/giphy.gif',
+        'https://media.giphy.com/media/rIq6ASPIqo2k0/giphy.gif',
+        'https://media.giphy.com/media/229P3dnAW8RzceKbps/giphy.gif'
     ]
 
     function randomPicker(array) {
