@@ -7,6 +7,7 @@
 html,
 body {
   margin: 0;
+  height: 100%;
 }
 
 html {
@@ -17,7 +18,7 @@ html {
 .app {
   border-radius: 7px;
   width: 360px;
-  height: 360px;
+  min-height: 360px;
   background-color: #ffffff;
   margin: 2em auto 0em auto;
   padding: 20px;
