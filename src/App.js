@@ -115,8 +115,8 @@ function App() {
   }
 
   const handleHomeBtn = () => {
-   
-    if (route === 'newCycle' && zyklusDataIsEmpty(1) === false) {
+
+    if (route === 'newCycle' && (zyklusDataIsEmpty(1) === false || Object.keys(zyklusData).length > 1)) {
       setAllCyclesData((prev) => ({ ...prev, [cycleNumber]: { firstDay: firstDay, data: { ...zyklusData } } }))
       setZyklusData({ 1: { temp: '', period: 'off', sex: 'off' } })
       setTemp('')
