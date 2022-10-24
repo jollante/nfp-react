@@ -19,15 +19,15 @@ export default function ZyklusDay(props) {
     return (
         <div className="app" id="zyklus-data-app">
             <div className="app-wrapper">
-                <div className="back-btn-zyklus-number-wrapper">
+                <div className="back-btn-zyklus-number-wrapper" style={{display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', alignItems: 'center'}}>
                     <button id="home-btn" onClick={props.handleHomeBtn}><Home /></button>
                     <h1>Cycle <span id="zyklus-number">{props.cycleNumber}</span></h1>
+                    <button onClick={props.showChangeFirstDay} style={{marginTop: 0, padding: '0.6em 0.8em', lineHeight: 0}}><SettingsIcon /></button>
                 </div>
                 <div className="zyklus-input-wrapper">
-                    <div className="day-settings-wrapper" style={{display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', alignItems: 'center'}}>
+                    <div className="day-settings-wrapper" style={{display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'center'}}>
                         <p>{props.day}</p>
                         <p>{dayjs(props.date).format('DD.MM.YYYY')}</p>
-                        <button onClick={props.showChangeFirstDay} style={{marginTop: 0, padding: '0.6em 0.8em', lineHeight: 0}}><SettingsIcon /></button>
                     </div>
                     <fieldset className="zyklus-data">
                         <label htmlFor="temp">Temp</label>
