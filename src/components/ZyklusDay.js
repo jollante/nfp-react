@@ -7,6 +7,15 @@ import dayjs from 'dayjs';
 
 export default function ZyklusDay(props) {
 
+    const periodOptionsArray = [
+        '',
+        'keine',
+        'schmier',
+        'leicht',
+        'normal',
+        'stark'
+    ]
+
     return (
         <div className="app" id="zyklus-data-app">
             <div className="app-wrapper">
@@ -22,24 +31,18 @@ export default function ZyklusDay(props) {
                     </div>
                     <fieldset className="zyklus-data">
                         <label htmlFor="temp">Temp</label>
-                        {props.zyklusData === undefined || props.zyklusDataIsEmpty() ? <input id="temp" type="number" min="35" max="42" step="0.05" onChange={props.handleTempChange} /> : <p style={{ marginTop: 0, marginBottom: 10, paddingLeft: 0 }}>{props.zyklusData.temp}</p>}
+                        <input disabled={props.mode === 'view'} id="temp" type="number" min="35" max="42" step="0.05" onChange={props.handleTempChange} value={props.temp}/>
                         <label htmlFor="period">Period</label>
-                        {props.zyklusData === undefined || props.zyklusDataIsEmpty() ? <select id="period" onChange={props.handlePeriodChange}>
-                            <option value="" ></option>
-                            <option value="keine" >keine</option>
-                            <option value="schmier">schmier</option>
-                            <option value="leicht">leicht</option>
-                            <option value="normal">normal</option>
-                            <option value="stark">stark</option>
-                        </select> : <p style={{ marginTop: 0, marginBottom: 10, paddingLeft: 0 }}>{props.zyklusData.period}</p>}
-
+                        <select disabled={props.mode === 'view'} id="period" onChange={props.handlePeriodChange} value={props.period}>
+                            {periodOptionsArray.map(option => <option value={option} key={option}>{option}</option>)}
+                        </select> 
                         <label htmlFor="sex">Sex</label>
-                        {props.zyklusData === undefined || props.zyklusDataIsEmpty() ? <input id="temp" type="checkbox" min="35" max="42" step="0.05" onChange={props.handleSexChange} /> : <p style={{ marginTop: 0, marginBottom: 10, paddingLeft: 0 }}>{props.zyklusData.sex} </p>}
+                     <input disabled={props.mode === 'view'} id="temp" type="checkbox" min="35" max="42" step="0.05" onChange={props.handleSexChange} checked={props.sex === 'on'} /> 
                     </fieldset>
                     <div className="btn-wrapper-zyklus-data">
                         <button type='button' onClick={props.decreaseCounter} id="back-btn-zyklus-data"><ArrowLeft /></button>
-                        <button type="button" id="save-data" onClick={props.onSaveBtnClick}>SAVE</button>
-                        <button type="button" id="edit-btn" className="hidden">Edit</button>
+                        {props.mode === 'edit' && <button type="button" id="save-data" onClick={props.onSaveBtnClick}>SAVE</button>}
+                        {props.mode === 'view' && <button type="button" id="edit-btn" onClick={props.onEditBtnClick}>Edit</button>}
                         <button type='button' onClick={props.increaseCounter}><ArrowRight /></button>
                     </div>
                     <p id="fade" className="visibility-hidden">gespeichert</p>

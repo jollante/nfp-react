@@ -8,9 +8,10 @@ import dayjs from 'dayjs';
 
 function App() {
   const [route, setRoute] = useState('home');
+  const [mode, setMode] = useState('edit');
   const [cycleNumber, setCycleNumber] = useState(1)
   const [day, setDay] = useState(1);
-  const [zyklusData, setZyklusData] = useState({});
+  const [zyklusData, setZyklusData] = useState({ 1: { temp: '', period: 'off', sex: 'off' } });
   const [allCyclesData, setAllCyclesData] = useState({});
   const [temp, setTemp] = useState('');
   const [period, setPeriod] = useState('');
@@ -18,9 +19,9 @@ function App() {
   const [date, setDate] = useState(null);
   const [firstDay, setFirstDay] = useState(null);
 
-  const zyklusDataIsEmpty = () => {
+  const zyklusDataIsEmpty = (day) => {
     if (zyklusData[day]) {
-      if (zyklusData[day].temp === '' && zyklusData[day].sex === '' && zyklusData[day].period === '') {
+      if ((zyklusData[day].temp === '' && zyklusData[day].sex === 'off' && zyklusData[day].period === 'off')) {
         return true
       } else {
         return false
@@ -31,22 +32,10 @@ function App() {
   };
 
   useEffect(() => {
-    if (zyklusData[day]) {
-      setTemp(zyklusData[day].temp)
-      setPeriod(zyklusData[day].period)
-      setSex(zyklusData[day].sex)
-    } else {
-      setTemp('');
-      setPeriod('');
-      setSex('');
-    }
-  }, [day, zyklusData])
-
-  useEffect(() => {
     if (day === 1) {
-      setDate(firstDay);  
+      setDate(firstDay);
     }
-  },[day,firstDay])
+  }, [day, firstDay])
 
   const handleTempChange = ({ target }) => {
     setTemp(target.value)
@@ -57,52 +46,87 @@ function App() {
   }
 
   const handleSexChange = ({ target }) => {
-    if (target.value === 'on') {
-      setSex('YES')
-    }
+    setSex(target.value)
   }
 
   const onSaveBtnClick = () => {
-  
-    if (!zyklusData[day]) {
-      setZyklusData((prev) => ({ ...prev, [day]: { temp: temp, period: period, sex: sex } }));
-    } else if (zyklusDataIsEmpty) {
-      setZyklusData((prev) => ({ ...prev, [day]: { temp: '', period: '', sex: '' } }));
-    }
+    setZyklusData((prev) => ({ ...prev, [day]: { temp: temp, period: period, sex: sex } }));
+    setMode('view')
+  }
+
+  const onEditBtnClick = () => {
+    setMode('edit')
   }
 
   const increaseCounter = () => {
-    setDay(day + 1)
+    const newDay = (day + 1)
+    setDay(newDay)
     const newDate = dayjs(date).add(1, 'day')
     setDate(newDate)
+    if (zyklusData[newDay]) {
+      setTemp(zyklusData[newDay].temp)
+      setSex(zyklusData[newDay].sex)
+      setPeriod(zyklusData[newDay].period)
+      setMode('view')
+    } else {
+      setTemp('')
+      setSex('off')
+      setPeriod('off')
+      setMode('edit')
+    }
   }
 
   const decreaseCounter = () => {
     if (day > 1) {
-      setDay(day - 1)
+      const newDay = (day - 1)
+      setDay(newDay)
       const newDate = dayjs(date).subtract(1, 'day')
       setDate(newDate)
+      if (zyklusData[newDay] && zyklusDataIsEmpty(newDay) === false) {
+        setTemp(zyklusData[newDay].temp)
+        setSex(zyklusData[newDay].sex)
+        setPeriod(zyklusData[newDay].period)
+        setMode('view') 
+      }
+      else {
+        setTemp('')
+        setSex('off')
+        setPeriod('off')
+        setMode('edit')
+      }
+
     }
   }
 
   const handleNewCycleBtn = () => {
+
     setDate(firstDay)
     setRoute('newCycle')
     setFirstDay(dayjs())
     setDay(1)
-    setZyklusData({})
+    setTemp('')
+    setSex('off')
+    setPeriod('off')
+    setMode('edit')
 
-    if (Object.keys(allCyclesData).length && !zyklusDataIsEmpty()) {
-      setCycleNumber((prev) => prev + 1)
+    if (Object.keys(allCyclesData).length) {
+      setCycleNumber(Object.keys(allCyclesData).length + 1)
     }
   }
 
   const handleHomeBtn = () => {
-    if (Object.keys(zyklusData).length) {
-      setAllCyclesData((prev) => ({ [cycleNumber]: { firstDay: firstDay, data: { ...zyklusData } }, ...prev }))
+   
+    if (route === 'newCycle' && zyklusDataIsEmpty(1) === false) {
+      setAllCyclesData((prev) => ({ ...prev, [cycleNumber]: { firstDay: firstDay, data: { ...zyklusData } } }))
+      setZyklusData({ 1: { temp: '', period: 'off', sex: 'off' } })
+      setTemp('')
+      setSex('off')
+      setPeriod('off')
+      setMode('edit')
     }
     setDay(1)
     setRoute('home')
+
   }
 
   const handleOldCyclesBtn = () => {
@@ -110,7 +134,14 @@ function App() {
   }
 
   const showCycleData = (cycleNumber) => {
+    setCycleNumber(parseInt(cycleNumber))
     setZyklusData(allCyclesData[cycleNumber].data)
+    setTemp(allCyclesData[cycleNumber].data[day].temp)
+    setPeriod(allCyclesData[cycleNumber].data[day].period)
+    setSex(allCyclesData[cycleNumber].data[day].sex)
+    if (allCyclesData[cycleNumber].data[day]) {
+      setMode('view')
+    }
     setRoute('newCycle')
   }
 
@@ -121,14 +152,20 @@ function App() {
   const changeFirstDay = (value) => {
     setFirstDay(value)
     setRoute('newCycle')
+    if (day === 1) {
+      setDate(dayjs(date))
+    } else {
+      const newDate = dayjs(value).add([day - 1], 'day')
+      setDate(newDate)
+    }
   }
-  
+
   return (
     <>
       {route === 'home' && <Home handleNewCycleBtn={handleNewCycleBtn} handleOldCyclesBtn={handleOldCyclesBtn} />}
-      {route === 'changeFirstDay' && <ChangeFirstDay changeFirstDay={changeFirstDay} handleHomeBtn={handleHomeBtn} />}
+      {route === 'changeFirstDay' && <ChangeFirstDay firstDay={firstDay} changeFirstDay={changeFirstDay} handleHomeBtn={handleHomeBtn} />}
       {route === 'oldCycles' && <OldCycles allCyclesData={allCyclesData} handleHomeBtn={handleHomeBtn} showCycleData={showCycleData} />}
-      {route === 'newCycle' && <ZyklusDay date={date} cycleNumber={cycleNumber} day={day} zyklusData={zyklusData[day]} increaseCounter={increaseCounter} decreaseCounter={decreaseCounter} onSaveBtnClick={onSaveBtnClick} handleTempChange={handleTempChange} handleSexChange={handleSexChange} handlePeriodChange={handlePeriodChange} zyklusDataIsEmpty={zyklusDataIsEmpty} handleHomeBtn={handleHomeBtn} showChangeFirstDay={showChangeFirstDay} />}
+      {route === 'newCycle' && <ZyklusDay onEditBtnClick={onEditBtnClick} mode={mode} temp={temp} sex={sex} date={date} period={period} cycleNumber={cycleNumber} day={day} zyklusData={zyklusData[day]} increaseCounter={increaseCounter} decreaseCounter={decreaseCounter} onSaveBtnClick={onSaveBtnClick} handleTempChange={handleTempChange} handleSexChange={handleSexChange} handlePeriodChange={handlePeriodChange} zyklusDataIsEmpty={zyklusDataIsEmpty} handleHomeBtn={handleHomeBtn} showChangeFirstDay={showChangeFirstDay} />}
     </>
   );
 }
