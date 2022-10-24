@@ -23,7 +23,7 @@ export default function OldCycles(props) {
 
         <div className="app" id="app">
             <button id="home-btn" onClick={props.handleHomeBtn}><Home /></button>
-            {Object.keys(props.allCyclesData).length ? <ul>{Object.keys(props.allCyclesData).map((cycleNumber) => <li onClick={() => props.showCycleData(cycleNumber)}>{cycleNumber}</li>)}</ul> : <div><p>{randomPicker(funnyArray)}</p><img src={randomPicker(funnyGifs)} alt='funny-gif' style={{maxWidth: '100%', height:'auto', minWidth: '100%'}}/></div>}   
+            {Object.keys(props.allCyclesData).length ? <ul style={{listStyle: 'none', fontSize: 18}}>{Object.keys(props.allCyclesData).map((cycleNumber) => <li onClick={() => props.showCycleData(cycleNumber)}>{cycleNumber}</li>)}</ul> : <div><p>{randomPicker(funnyArray)}</p><img src={randomPicker(funnyGifs)} alt='funny-gif' style={{maxWidth: '100%', height:'auto', minWidth: '100%'}}/></div>}   
         </div>
     )
 }
