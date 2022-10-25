@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/nfp-react/static/css/main.4b43d2db.css",
-    "main.js": "/nfp-react/static/js/main.268b403c.js",
+    "main.js": "/nfp-react/static/js/main.272ee9db.js",
     "static/js/787.fddcfc04.chunk.js": "/nfp-react/static/js/787.fddcfc04.chunk.js",
     "static/media/settingsIcon.svg": "/nfp-react/static/media/settingsIcon.606bb0b89ed50e5cb0f3d037f1130eb6.svg",
     "index.html": "/nfp-react/index.html",
@@ -9,11 +9,11 @@
     "static/media/arrowRight.svg": "/nfp-react/static/media/arrowRight.a0e1c7d602c46962779026e687ed81bc.svg",
     "static/media/home.svg": "/nfp-react/static/media/home.b4f0a264e4da83385882e0bcb325db12.svg",
     "main.4b43d2db.css.map": "/nfp-react/static/css/main.4b43d2db.css.map",
-    "main.268b403c.js.map": "/nfp-react/static/js/main.268b403c.js.map",
+    "main.272ee9db.js.map": "/nfp-react/static/js/main.272ee9db.js.map",
     "787.fddcfc04.chunk.js.map": "/nfp-react/static/js/787.fddcfc04.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4b43d2db.css",
-    "static/js/main.268b403c.js"
+    "static/js/main.272ee9db.js"
   ]
 }
