@@ -160,10 +160,16 @@ function App() {
     }
   }
 
+  const handleBackBtn = () => {
+    if (route === 'changeFirstDay') {
+      setRoute('newCycle')
+    } 
+  }
+
   return (
     <>
       {route === 'home' && <Home handleNewCycleBtn={handleNewCycleBtn} handleOldCyclesBtn={handleOldCyclesBtn} />}
-      {route === 'changeFirstDay' && <ChangeFirstDay firstDay={firstDay} changeFirstDay={changeFirstDay} handleHomeBtn={handleHomeBtn} />}
+      {route === 'changeFirstDay' && <ChangeFirstDay firstDay={firstDay} changeFirstDay={changeFirstDay} handleBackBtn={handleBackBtn} />}
       {route === 'oldCycles' && <OldCycles allCyclesData={allCyclesData} handleHomeBtn={handleHomeBtn} showCycleData={showCycleData} />}
       {route === 'newCycle' && <ZyklusDay onEditBtnClick={onEditBtnClick} mode={mode} temp={temp} sex={sex} date={date} period={period} cycleNumber={cycleNumber} day={day} zyklusData={zyklusData[day]} increaseCounter={increaseCounter} decreaseCounter={decreaseCounter} onSaveBtnClick={onSaveBtnClick} handleTempChange={handleTempChange} handleSexChange={handleSexChange} handlePeriodChange={handlePeriodChange} zyklusDataIsEmpty={zyklusDataIsEmpty} handleHomeBtn={handleHomeBtn} showChangeFirstDay={showChangeFirstDay} />}
     </>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { ReactComponent as ArrowLeft } from '../arrowLeft.svg'
 import { ReactComponent as ArrowRight } from '../arrowRight.svg'
 import { ReactComponent as Home } from '../home.svg'

@@ -11,11 +11,11 @@ export default function ChangeFirstDay(props) {
 
     return (
         <div id='app' className="app">
-            <button id="home-btn" onClick={props.handleHomeBtn}>Back</button>
-            <h1>Change First Day Of Period</h1>
-            <form  >
+            <button id="home-btn" onClick={props.handleBackBtn}>Back</button>
+            <h1 style={{margin: 10}}>Change First Day Of Period</h1>
+            <form style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                 <input type='date' name='new-first-day' onChange={getFirstDay} value={dayjs(newFirstDay).format('YYYY-MM-DD')}/>
-                <button type='button' onClick={() => props.changeFirstDay(newFirstDay)}>Change First Day</button>
+                <button type='button' onClick={() => props.changeFirstDay(newFirstDay)}>Save Changes</button>
             </form>
         </div>
     )
