@@ -24,7 +24,7 @@ export default function OldCycles(props) {
 
         <div className="app" id="app">
             <button id="home-btn" onClick={props.handleHomeBtn}><Home /></button>
-            {Object.keys(props.allCyclesData).length ? <ul style={{listStyle: 'none', fontSize: 18, paddingLeft: 0}}>{Object.keys(props.allCyclesData).map((cycleNumber, index) => <li style={{padding: '0.5em 1em', backgroundColor: 'rgb(247, 220, 232)', borderRadius: 5, marginBottom: 5}}key={cycleNumber} onClick={() => props.showCycleData(cycleNumber)}><strong>{cycleNumber} </strong> <span style={{fontSize: 14}}>{dayjs(props.allCyclesData[cycleNumber].firstDay).format('DD.MM.YYYY')}</span></li>)}</ul> : <div><p>{randomPicker(funnyArray)}</p><img src={randomPicker(funnyGifs)} alt='funny-gif' style={{maxWidth: '100%', height:'auto', minWidth: '100%'}}/></div>}   
+            {Object.keys(props.allCyclesData).length ? <ul style={{listStyle: 'none', fontSize: 18, paddingLeft: 0}}>{Object.keys(props.allCyclesData).reverse().map((cycleNumber) => <li style={{padding: '0.5em 1em', backgroundColor: 'rgb(247, 220, 232)', borderRadius: 5, marginBottom: 5}}key={cycleNumber} onClick={() => props.showCycleData(cycleNumber)}><strong>{cycleNumber} </strong> <span style={{fontSize: 14}}>{dayjs(props.allCyclesData[cycleNumber].firstDay).format('DD.MM.YYYY')}</span></li>)}</ul> : <div><p>{randomPicker(funnyArray)}</p><img src={randomPicker(funnyGifs)} alt='funny-gif' style={{maxWidth: '100%', height:'auto', minWidth: '100%'}}/></div>}   
         </div>
     )
 }
