@@ -13,7 +13,7 @@ export default function ChangeFirstDay(props) {
         <div id='app' className="app">
             <div style={{display: 'grid', gridTemplateColumns:'1fr 3fr', marginBottom: 20 }}>
                 <button style={{ padding: '0.4em 0.6em', marginTop: 0 }} id="home-btn" onClick={props.handleBackBtn}>Back</button>
-                <h1 style={{ margin: 10, textAlign: 'center', color: '#b14f8c' }}>Change First Day<span style={{fontWeight: 'normal', fontSize: 14, display: 'block'}}> Of Period</span></h1>
+                <h1 style={{ margin: 2, textAlign: 'center', color: '#b14f8c' }}>Change First Day<span style={{fontWeight: 'normal', fontSize: 14, display: 'block'}}> Of Period</span></h1>
             </div>
 
             <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', border: '2px solid #42ada3', borderRadius: 5, padding: '40px 0px'  }}>
