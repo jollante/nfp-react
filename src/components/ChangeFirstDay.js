@@ -17,7 +17,7 @@ export default function ChangeFirstDay(props) {
             </div>
 
             <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', border: '2px solid #42ada3', borderRadius: 5, padding: '40px 0px'  }}>
-                <input style={{ marginBottom: 0 }} type='date' name='new-first-day' onChange={getFirstDay} value={dayjs(newFirstDay).format('YYYY-MM-DD')} />
+                <input style={{ marginBottom: 0, padding: '1em 2em' }} type='date' name='new-first-day' onChange={getFirstDay} value={dayjs(newFirstDay).format('YYYY-MM-DD')} />
                 <button type='button' onClick={() => props.changeFirstDay(newFirstDay)}>Save</button>
             </form>
         </div>

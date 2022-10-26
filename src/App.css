@@ -66,7 +66,7 @@ html {
   grid-template-columns: 1fr 1fr;
 }
 
-input {
+.zyklus-input-wrapper input {
   margin-bottom: 10px;
   width: 80%;
   height: 22px;
